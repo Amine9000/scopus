@@ -2,7 +2,6 @@ from fastapi import Response
 import matplotlib.pyplot as plt
 import pandas as pd
 from io import BytesIO
-from utils.scopus.get_scopus_data import get_scopus_data
 from utils.scopus.search_scopus import search_scopus
 from pprintjson import pprintjson as ppjson
 
@@ -22,7 +21,6 @@ def get_publication_citation(query: str):
         if data:
             entries = data.get('search-results', {}).get('entry', [])
             for entry in entries:
-                ppjson(entry)
                 citations = int(entry.get('citedby-count', 0))
                 eid = entry.get('eid', 0)
                 citation_counts.append(citations)

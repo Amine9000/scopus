@@ -5,7 +5,6 @@ from fastapi import Response
 from utils.scopus.search_scopus import search_scopus
 from io import BytesIO
 from collections import defaultdict
-from pprintjson import pprintjson as ppjson
 
 
 def get_publication_trend(query: str):

@@ -1,7 +1,6 @@
 
 from utils.scopus.author_search import author_search, author_search_pagination
 from fastapi.responses import JSONResponse
-from pprintjson import pprintjson as ppjson
 import pandas as pd
 import matplotlib.pyplot as plt
 from io import BytesIO
