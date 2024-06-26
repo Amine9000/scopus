@@ -11,14 +11,13 @@ import base64
 def process_data(data: str, author_id: str):
     total_publications = int(data.get(
         "search-results", {}).get("opensearch:totalResults", 0))
-    author_name = data.get("dc:creator", "")
     data = data.get("search-results", {}).get("entry", [])
 
     start = len(data)
 
     while start < total_publications:
         response = author_search_pagination(
-            start=start, author_id=author_id, author_name=author_name)
+            start=start, author_id=author_id)
         new_enties = response.get("search-results", {}).get("entry", [])
         data = data + new_enties
         start += len(new_enties)
@@ -46,13 +45,13 @@ def process_data(data: str, author_id: str):
 
     response_content = {
         "Author_id": author_id,
-        "Author_name": author_name,
         "Nombre_total_publication": total_publications,
         "Nombre_total_citation": int(data_df['citedby-count'].sum()),
         "Average_citations": float(data_df['citedby-count'].mean()),
         "Top_publications": top_3_publications_list,
         "Distribution_citations": base64.b64encode(buf.getvalue()).decode('utf-8')
     }
+    return response_content
 
 
 def author_search_handler(author_id: str = None, author_name: str = None):

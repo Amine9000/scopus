@@ -47,7 +47,6 @@ def author_search_pagination(start: int = 0, author_id=None, author_name=None):
         'query': f"{author_query}",
         'start': start,
     }
-
     response = requests.get(BASE_URL, headers=headers, params=params)
     if response.status_code == 200:
         return response.json()
