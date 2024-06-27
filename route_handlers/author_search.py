@@ -5,7 +5,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
-from pprintjson import pprintjson as ppjson
 
 
 def process_data(data: str, author_id: str):
@@ -78,6 +77,5 @@ def process_data(data: str, author_id: str):
 def author_search_handler(author_id: str = None, author_name: str = None):
     print(author_name)
     res = author_search(author_id, author_name)
-    ppjson(res)
     response_content = process_data(res, author_id)
     return JSONResponse(content=response_content)
