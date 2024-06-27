@@ -11,8 +11,8 @@ from route_handlers.authors_search import authors_search
 app = FastAPI()
 
 origins = [
-    "http://127.0.0.1:5500",
-    "http://localhost:5500",
+    "http://127.0.0.1:3000",
+    "http://localhost:3000",
 ]
 
 app.add_middleware(
@@ -41,7 +41,6 @@ async def get_publication_citations_route(query: str):
 
 @app.get("/author")
 async def get_author(author_id: str = None, author_name: str = None):
-    print(author_name)
     return author_search_handler(author_id, author_name)
 
 

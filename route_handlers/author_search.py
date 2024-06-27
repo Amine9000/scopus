@@ -12,7 +12,6 @@ def process_data(data: str, author_id: str):
     entries = data.get("search-results", {}).get("entry", [])
     if len(entries) == 1:
         if "error" in entries[0]:
-            print(":In")
             return {"message": entries[0]['error']}
     total_publications = int(data.get(
         "search-results", {}).get("opensearch:totalResults", 0))
@@ -75,7 +74,6 @@ def process_data(data: str, author_id: str):
 
 
 def author_search_handler(author_id: str = None, author_name: str = None):
-    print(author_name)
     res = author_search(author_id, author_name)
     response_content = process_data(res, author_id)
     return JSONResponse(content=response_content)

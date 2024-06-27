@@ -7,7 +7,6 @@ BASE_URL = 'https://api.elsevier.com/content/search/scopus'
 
 
 def author_search(author_id=None, author_name=None):
-    print(author_name)
     headers = {
         'Accept': 'application/json',
         'X-ELS-APIKey': SCOPUS_API_KEY
