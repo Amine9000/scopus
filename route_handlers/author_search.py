@@ -56,7 +56,6 @@ def process_data(data: str, author_id: str):
     ax.set_title('Citations per Publication')
     plt.xticks(rotation=30, ha='right')
     plt.subplots_adjust(bottom=0.3)
-    plt.show()
     buf = BytesIO()
     plt.savefig(buf, format="png")
     buf.seek(0)
