@@ -42,7 +42,7 @@ def process_data(data: str, author_id: str):
 
     top_3_publications = data_df.nlargest(3, 'citedby-count')
     top_3_publications_list = top_3_publications[[
-        'dc:title', 'prism:publicationName', 'prism:doi', 'citedby-count']].to_dict(orient='records')
+        'dc:title', 'prism:publicationName', 'prism:doi', "source-id", 'citedby-count']].to_dict(orient='records')
 
     distribution_of_citation = data_df[[
         'prism:doi', 'citedby-count']]

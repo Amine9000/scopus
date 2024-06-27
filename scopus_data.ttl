@@ -1,0 +1,27 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ns1: <https://www.scopus.com/sourceid/> .
+@prefix scopus: <https://api.elsevier.com/content/abstract/scopus_id/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+scopus: a foaf:Person ;
+    scopus:NombreTotalCitation "56"^^xsd:string ;
+    scopus:NombreTotalPublication "10"^^xsd:string ;
+    scopus:authorID "57796397700"^^xsd:string ;
+    scopus:hasTopPublication ns1:21101044833,
+        ns1:21101132412 .
+
+ns1:21101044833 a ns1:Publication ;
+    ns1:citedbyCount "9"^^xsd:string,
+        "19"^^xsd:string ;
+    ns1:doi "10.31181/dmame0318062022m"^^xsd:string,
+        "10.31181/dmame04092023m"^^xsd:string ;
+    ns1:publicationName "Decision Making: Applications in Management and Engineering"^^xsd:string ;
+    ns1:title "A NOVEL DISCRETE RAT SWARM OPTIMIZATION (DRSO) ALGORITHM FOR SOLVING THE TRAVELING SALESMAN PROBLEM"^^xsd:string,
+        "EFFICIENT ROUTING OPTIMIZATION WITH DISCRETE PENGUINS SEARCH ALGORITHM FOR MTSP"^^xsd:string .
+
+ns1:21101132412 a ns1:Publication ;
+    ns1:citedbyCount "7"^^xsd:string ;
+    ns1:doi "10.31181/rme040116072023m"^^xsd:string ;
+    ns1:publicationName "Reports in Mechanical Engineering"^^xsd:string ;
+    ns1:title "Optimizing production scheduling with the spotted hyena algorithm: A novel approach to the flow shop problem"^^xsd:string .
+
