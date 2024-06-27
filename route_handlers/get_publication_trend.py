@@ -1,9 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from fastapi import Response
+from fastapi.responses import JSONResponse
 from utils.scopus.search_scopus import search_scopus
 from io import BytesIO
+import base64
 from collections import defaultdict
 
 
@@ -22,7 +23,6 @@ def get_publication_trend(query: str):
                     publication_years.append(publication_year)
 
         year += 5
-
 
     publication_counts = defaultdict(int)
     for y in publication_years:
@@ -44,4 +44,6 @@ def get_publication_trend(query: str):
     buf = BytesIO()
     plt.savefig(buf, format='png')
     buf.seek(0)
-    return Response(content=buf.getvalue(), media_type='image/png')
+    response_content = {"graph": base64.b64encode(
+        buf.getvalue()).decode('utf-8')}
+    return JSONResponse(content=response_content)

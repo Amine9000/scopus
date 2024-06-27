@@ -8,6 +8,8 @@ from route_handlers.get_publication_trend import get_publication_trend
 from route_handlers.get_publication_citaion import get_publication_citation
 from route_handlers.author_search import author_search_handler
 from route_handlers.authors_search import authors_search
+from route_handlers.rdf_author_search import rdf_author_search
+
 app = FastAPI()
 
 origins = [
@@ -44,9 +46,14 @@ async def get_author(author_id: str = None, author_name: str = None):
     return author_search_handler(author_id, author_name)
 
 
+@app.get("/rdf/author")
+async def get_rdf_author(author_id: str = None, author_name: str = None):
+    return rdf_author_search(author_id, author_name)
+
+
 @app.get("/authors")
 async def get_authors(auth_ids):
-    return authors_search(auth_ids)
+    return rdf_author_search(auth_ids)
 
 if __name__ == "__main__":
     import uvicorn

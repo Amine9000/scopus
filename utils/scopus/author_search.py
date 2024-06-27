@@ -22,7 +22,7 @@ def author_search(author_id=None, author_name=None):
             lname, fname = names
             author_query = f"AUTHLASTNAME({lname.strip()}) AND AUTHFIRST({fname.strip()})"
         else:
-            author_query = f"AUTHLASTNAME({author_name.strip()}) OR AUTHFIRST({author_name.strip()})"
+            author_query = f"AUTH({author_name})"
 
     params = {
         'query': f"{author_query}",
