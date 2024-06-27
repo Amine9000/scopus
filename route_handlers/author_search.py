@@ -5,9 +5,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
+from pprintjson import pprintjson as ppjson
 
 
 def process_data(data: str, author_id: str):
+
+    entries = data.get("search-results", {}).get("entry", [])
+    if len(entries) == 1:
+        if "error" in entries[0]:
+            print(":In")
+            return {"message": entries[0]['error']}
     total_publications = int(data.get(
         "search-results", {}).get("opensearch:totalResults", 0))
     data = data.get("search-results", {}).get("entry", [])
@@ -22,7 +29,13 @@ def process_data(data: str, author_id: str):
         start += len(new_enties)
 
     data_df = pd.DataFrame(data)
-    data_df['citedby-count'] = data_df['citedby-count'].astype('int')
+    if 'citedby-count' in data_df:
+        data_df['citedby-count'] = data_df['citedby-count'].fillna(
+            0).astype(int)
+    else:
+        data_df['citedby-count'] = 0
+
+    data_df['prism:doi'] = data_df['prism:doi'].fillna("N/A")
 
     nbr_citation_total = 0
     for entry in data:
@@ -36,7 +49,16 @@ def process_data(data: str, author_id: str):
     distribution_of_citation = data_df[[
         'prism:doi', 'citedby-count']]
 
-    distribution_of_citation.plot(kind="bar")
+    fig, ax = plt.subplots(figsize=(15, 10))
+    distribution_of_citation.plot(
+        kind="bar", x='prism:doi', y='citedby-count', ax=ax)
+
+    ax.set_xlabel('DOI')
+    ax.set_ylabel('Number of Citations')
+    ax.set_title('Citations per Publication')
+    plt.xticks(rotation=30, ha='right')
+    plt.subplots_adjust(bottom=0.3)
+    plt.show()
     buf = BytesIO()
     plt.savefig(buf, format="png")
     buf.seek(0)
@@ -54,6 +76,8 @@ def process_data(data: str, author_id: str):
 
 
 def author_search_handler(author_id: str = None, author_name: str = None):
+    print(author_name)
     res = author_search(author_id, author_name)
+    ppjson(res)
     response_content = process_data(res, author_id)
     return JSONResponse(content=response_content)

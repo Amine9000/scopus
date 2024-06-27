@@ -7,6 +7,7 @@ BASE_URL = 'https://api.elsevier.com/content/search/scopus'
 
 
 def author_search(author_id=None, author_name=None):
+    print(author_name)
     headers = {
         'Accept': 'application/json',
         'X-ELS-APIKey': SCOPUS_API_KEY
@@ -17,7 +18,12 @@ def author_search(author_id=None, author_name=None):
     if author_id:
         author_query = f"AU-ID({author_id})"
     elif author_name:
-        author_query = f"AUTH({author_name})"
+        names = author_name.split(',')
+        if len(names) == 2:
+            lname, fname = names
+            author_query = f"AUTHLASTNAME({lname.strip()}) AND AUTHFIRST({fname.strip()})"
+        else:
+            author_query = f"AUTHLASTNAME({author_name.strip()}) OR AUTHFIRST({author_name.strip()})"
 
     params = {
         'query': f"{author_query}",

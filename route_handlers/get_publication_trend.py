@@ -23,7 +23,6 @@ def get_publication_trend(query: str):
 
         year += 5
 
-    ppjson(publication_years)
 
     publication_counts = defaultdict(int)
     for y in publication_years:

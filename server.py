@@ -24,9 +24,9 @@ app.add_middleware(
 )
 
 
-@app.get("/citations/doi")
-async def get_citations_route(doi: str):
-    return get_citations(doi)
+@app.get("/citations/{doi_1}/{doi_2}")
+async def get_citations_route(doi_1: str = None, doi_2: str = None):
+    return get_citations(doi_1, doi_2)
 
 
 @app.get("/publications/trend")
@@ -40,7 +40,8 @@ async def get_publication_citations_route(query: str):
 
 
 @app.get("/author")
-async def get_author(author_id: str, author_name: str):
+async def get_author(author_id: str = None, author_name: str = None):
+    print(author_name)
     return author_search_handler(author_id, author_name)
 
 

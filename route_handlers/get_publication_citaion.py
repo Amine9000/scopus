@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from io import BytesIO
 from utils.scopus.search_scopus import search_scopus
-from pprintjson import pprintjson as ppjson
 
 
 def get_publication_citation(query: str):
