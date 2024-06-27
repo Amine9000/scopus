@@ -1,11 +1,8 @@
 from rdflib import Graph, Literal, Namespace
 from rdflib.namespace import RDF, FOAF, XSD
-from pprintjson import pprintjson as ppjson
 
 
 def convert_to_rdf(scopus_data, author_id: str):
-    # ppjson(scopus_data)
-    # Initialize RDF graph
     g = Graph()
 
     """
@@ -23,8 +20,6 @@ def convert_to_rdf(scopus_data, author_id: str):
         "https://api.elsevier.com/content/abstract/scopus_id/")
     pub_ns = Namespace("https://www.scopus.com/sourceid/")
     g.bind('scopus', scopus_ns)
-
-    print(FOAF)
 
     # Example conversion for author data
     author_uri = scopus_ns[scopus_data.get("prism:url", "")]

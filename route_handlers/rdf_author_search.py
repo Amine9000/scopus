@@ -4,12 +4,10 @@ from utils.rdf.conver_to_rdf import convert_to_rdf
 from utils.rdf.execute_sparql import execute_sparql_query
 from utils.rdf.sparql_to_dict import sparql_result_to_dict
 from route_handlers.author_search import process_data
-from pprintjson import pprintjson as ppjson
 
 
 def rdf_author_search(author_id: str = None, author_name: str = None):
     res = author_search(author_id, author_name)
-    ppjson(res)
     scopus_data = process_data(res, author_id=author_id)
     g = convert_to_rdf(scopus_data, author_id)
     sparql_query = """
@@ -33,5 +31,4 @@ def rdf_author_search(author_id: str = None, author_name: str = None):
     """
     response_content = sparql_result_to_dict(
         execute_sparql_query(g, sparql_query))
-    print(response_content)
     return JSONResponse(content=response_content)
