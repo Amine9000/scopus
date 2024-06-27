@@ -1,10 +1,8 @@
 from rdflib import Graph, Literal, Namespace
 from rdflib.namespace import RDF, FOAF, XSD
-from pprintjson import pprintjson as ppjson
 
 
 def convert_to_rdf(scopus_data):
-    ppjson(scopus_data)
     # Initialize RDF graph
     g = Graph()
 
