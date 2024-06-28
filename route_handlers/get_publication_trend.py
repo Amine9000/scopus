@@ -34,7 +34,7 @@ def get_publication_trend(query: str):
         publication_counts, orient='index', columns=['count']).sort_index()
 
     # Plot the trend
-    fig, ax = plt.subplots(figsize=(15, 8))
+    fig, ax = plt.subplots(figsize=(20, 13))
     trend_data.plot(kind='line', ax=ax, color='green',
                     alpha=0.7, label='Bar Plot')
     plt.xlabel('Year')
