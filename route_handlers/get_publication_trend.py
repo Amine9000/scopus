@@ -12,14 +12,15 @@ def get_publication_trend(query: str):
 
     publication_years = []
     year = 1990
-    while year < 2024:
+    while year < 2025:
         data = search_scopus(query, count=25, year=year)
         if data:
             entries = data.get('search-results', {}).get('entry', [])
             for entry in entries:
                 publication_date = entry.get('prism:coverDate', '')
                 if publication_date:
-                    publication_years.append(publication_date)
+                    publication_year = publication_date[:7]  # 1999-02-10
+                    publication_years.append(publication_year)
 
         year += 5
         year = year if year < 2024 else 2024
