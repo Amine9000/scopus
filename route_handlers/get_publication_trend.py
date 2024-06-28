@@ -12,7 +12,7 @@ def get_publication_trend(query: str):
 
     publication_years = []
     year = 1990
-    while year <= 2024:
+    while year < 2024:
         data = search_scopus(query, count=25, year=year)
         if data:
             entries = data.get('search-results', {}).get('entry', [])
