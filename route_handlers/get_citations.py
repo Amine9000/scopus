@@ -8,6 +8,8 @@ def get_citations(doi_1: str = None, doi_2: str = None):
                          ).get('coredata', {}).get('citedby-count', 0)
     affiliations = data.get('abstracts-retrieval-response', {}
                             ).get("affiliation", [])
+    if isinstance(affiliations, dict):
+        affiliations = [affiliations]
     publicationName = data.get('abstracts-retrieval-response', {}
                                ).get("coredata", {}).get("prism:publicationName", "")
     title = data.get('abstracts-retrieval-response', {}
