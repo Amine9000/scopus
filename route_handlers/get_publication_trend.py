@@ -19,8 +19,7 @@ def get_publication_trend(query: str):
             for entry in entries:
                 publication_date = entry.get('prism:coverDate', '')
                 if publication_date:
-                    publication_year = publication_date[:4]
-                    publication_years.append(publication_year)
+                    publication_years.append(publication_date)
 
         year += 5
         year = year if year < 2024 else 2024
