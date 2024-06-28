@@ -19,7 +19,7 @@ def get_publication_trend(query: str):
             for entry in entries:
                 publication_date = entry.get('prism:coverDate', '')
                 if publication_date:
-                    publication_year = publication_date[:7]  # 1999-02-10
+                    publication_year = publication_date  # 1999-02-10
                     publication_years.append(publication_year)
 
         year += 5
@@ -34,7 +34,7 @@ def get_publication_trend(query: str):
         publication_counts, orient='index', columns=['count']).sort_index()
 
     # Plot the trend
-    fig, ax = plt.subplots(figsize=(20, 13))
+    fig, ax = plt.subplots(figsize=(17, 10))
     trend_data.plot(kind='line', ax=ax, color='green',
                     alpha=0.7, label='Bar Plot')
     plt.xlabel('Year')
